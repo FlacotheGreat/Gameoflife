@@ -99,6 +99,32 @@ function drawGrid() {
             yCell = 0;
         }
 
+        // send data to c sharp code
+        var postdata = JSON.stringify(
+         {
+             "x": xCell,
+             "y": yCell,
+         });
+         try {
+             $.ajax({
+                 type: "POST",
+                 url: "",
+                 cache: false,
+                 data: postdata,
+                 dataType: "json",
+                 success: getSuccess,
+                 error: getFail
+             });
+         } catch (e) {
+             alert(e);
+         }
+         function getSuccess(data, textStatus, jqXHR) {
+             alert(data.Response);
+         };
+         function getFail(jqXHR, textStatus, errorThrown) {
+             alert(jqXHR.status);
+         };
+
         // console.log(xCell, yCell);
         assignColorToSquare(xCell, yCell, "#0000FF");
     }
