@@ -9,3 +9,14 @@ C:\Users\ridin\source\repos\GameOfLifeClean\GameOfLifeClean\obj\Debug\netcoreapp
 C:\Users\ridin\source\repos\GameOfLifeClean\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.AssemblyInfo.cs
 C:\Users\ridin\source\repos\GameOfLifeClean\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.dll
 C:\Users\ridin\source\repos\GameOfLifeClean\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.pdb
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\bin\Debug\netcoreapp2.0\GameOfLifeClean.deps.json
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\bin\Debug\netcoreapp2.0\GameOfLifeClean.runtimeconfig.json
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\bin\Debug\netcoreapp2.0\GameOfLifeClean.runtimeconfig.dev.json
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\bin\Debug\netcoreapp2.0\GameOfLifeClean.dll
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\bin\Debug\netcoreapp2.0\GameOfLifeClean.pdb
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.csprojAssemblyReference.cache
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.csproj.CoreCompileInputs.cache
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.AssemblyInfoInputs.cache
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.AssemblyInfo.cs
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.dll
+C:\Users\Angie\Documents\Git\Gameoflife\GameOfLifeClean\obj\Debug\netcoreapp2.0\GameOfLifeClean.pdb
