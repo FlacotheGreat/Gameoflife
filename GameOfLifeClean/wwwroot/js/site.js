@@ -29,75 +29,84 @@ function drawGrid() {
         // y = (h - 2v) / h
         var y = (rect.height - 2 * (e.clientY - rect.top)) / rect.height;
         // console.log(x, y);
-        var xCell;
+        var xCell = 0;
 
-        if (x > -1 && x < -0.875) {
-            xCell = 0;
-        } else if (x > -0.875 && x < -0.75) {
-            xCell = 1;
-        } else if (x > -0.75 && x < -0.625) {
-            xCell = 2;
-        } else if (x > -0.625 && x < -0.5) {
-            xCell = 3;
-        } else if (x > -0.5 && x < -0.375) {
-            xCell = 4;
-        } else if (x > -0.375 && x < -0.25) {
-            xCell = 5;
-        } else if (x > -0.25 && x < -0.125) {
-            xCell = 6;
-        } else if (x > -0.125 && x < 0) {
-            xCell = 7;
-        } else if (x > 0 && x < 0.125) {
-            xCell = 8;
-        } else if (x > 0.125 && x < 0.25) {
-            xCell = 9;
-        } else if (x > 0.25 && x < 0.375) {
-            xCell = 10;
-        } else if (x > 0.375 && x < 0.5) {
-            xCell = 11;
-        } else if (x > 0.5 && x < 0.625) {
-            xCell = 12;
-        } else if (x > 0.625 && x < 0.75) {
-            xCell = 13;
-        } else if (x > 0.75 && x < 0.875) {
-            xCell = 14;
-        } else if (x > 0.875 && x < 1.0) {
-            xCell = 15;
+        for(int i = -1; i < x; i += 0.125){
+          xCell++;
         }
 
-        if (y > -1 && y < -0.875) {
-            yCell = 15;
-        } else if (y > -0.875 && y < -0.75) {
-            yCell = 14;
-        } else if (y > -0.75 && y < -0.625) {
-            yCell = 13;
-        } else if (y > -0.625 && y < -0.5) {
-            yCell = 12;
-        } else if (y > -0.5 && y < -0.375) {
-            yCell = 11;
-        } else if (y > -0.375 && y < -0.25) {
-            yCell = 10;
-        } else if (y > -0.25 && y < -0.125) {
-            yCell = 9;
-        } else if (y > -0.125 && y < 0) {
-            yCell = 8;
-        } else if (y > 0 && y < 0.125) {
-            yCell = 7;
-        } else if (y > 0.125 && y < 0.25) {
-            yCell = 6;
-        } else if (y > 0.25 && y < 0.375) {
-            yCell = 5;
-        } else if (y > 0.375 && y < 0.5) {
-            yCell = 4;
-        } else if (y > 0.5 && y < 0.625) {
-            yCell = 3;
-        } else if (y > 0.625 && y < 0.75) {
-            yCell = 2;
-        } else if (y > 0.75 && y < 0.875) {
-            yCell = 1;
-        } else if (y > 0.875 && y < 1.0) {
-            yCell = 0;
+        var yCell = 0;
+        for(int i = -1; i < y; i += 0.125){
+          yCell++;
         }
+
+        // if (x > -1 && x < -0.875) {
+        //     xCell = 0;
+        // } else if (x > -0.875 && x < -0.75) {
+        //     xCell = 1;
+        // } else if (x > -0.75 && x < -0.625) {
+        //     xCell = 2;
+        // } else if (x > -0.625 && x < -0.5) {
+        //     xCell = 3;
+        // } else if (x > -0.5 && x < -0.375) {
+        //     xCell = 4;
+        // } else if (x > -0.375 && x < -0.25) {
+        //     xCell = 5;
+        // } else if (x > -0.25 && x < -0.125) {
+        //     xCell = 6;
+        // } else if (x > -0.125 && x < 0) {
+        //     xCell = 7;
+        // } else if (x > 0 && x < 0.125) {
+        //     xCell = 8;
+        // } else if (x > 0.125 && x < 0.25) {
+        //     xCell = 9;
+        // } else if (x > 0.25 && x < 0.375) {
+        //     xCell = 10;
+        // } else if (x > 0.375 && x < 0.5) {
+        //     xCell = 11;
+        // } else if (x > 0.5 && x < 0.625) {
+        //     xCell = 12;
+        // } else if (x > 0.625 && x < 0.75) {
+        //     xCell = 13;
+        // } else if (x > 0.75 && x < 0.875) {
+        //     xCell = 14;
+        // } else if (x > 0.875 && x < 1.0) {
+        //     xCell = 15;
+        // }
+        //
+        // if (y > -1 && y < -0.875) {
+        //     yCell = 15;
+        // } else if (y > -0.875 && y < -0.75) {
+        //     yCell = 14;
+        // } else if (y > -0.75 && y < -0.625) {
+        //     yCell = 13;
+        // } else if (y > -0.625 && y < -0.5) {
+        //     yCell = 12;
+        // } else if (y > -0.5 && y < -0.375) {
+        //     yCell = 11;
+        // } else if (y > -0.375 && y < -0.25) {
+        //     yCell = 10;
+        // } else if (y > -0.25 && y < -0.125) {
+        //     yCell = 9;
+        // } else if (y > -0.125 && y < 0) {
+        //     yCell = 8;
+        // } else if (y > 0 && y < 0.125) {
+        //     yCell = 7;
+        // } else if (y > 0.125 && y < 0.25) {
+        //     yCell = 6;
+        // } else if (y > 0.25 && y < 0.375) {
+        //     yCell = 5;
+        // } else if (y > 0.375 && y < 0.5) {
+        //     yCell = 4;
+        // } else if (y > 0.5 && y < 0.625) {
+        //     yCell = 3;
+        // } else if (y > 0.625 && y < 0.75) {
+        //     yCell = 2;
+        // } else if (y > 0.75 && y < 0.875) {
+        //     yCell = 1;
+        // } else if (y > 0.875 && y < 1.0) {
+        //     yCell = 0;
+        // }
 
         // send data to c sharp code
         var postdata = JSON.stringify(
