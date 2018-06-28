@@ -130,10 +130,10 @@ function drawGrid() {
     }
 }
 
-function assignColorToSquare(x, y, color) {
+function assignColorToSquare(x, y, squareColor) {
     var c = document.getElementById("gameOfLife");
     var ctx = c.getContext("2d");
-    ctx.fillStyle = color;
+    ctx.fillStyle = squareColor;
     ctx.fillRect((totalWidth / gameWidth) * x, ((totalHeight / gameHeight) * y), (totalWidth / gameWidth) - 1, (totalHeight / gameHeight) - 1);
     ctx.stroke();
 }
