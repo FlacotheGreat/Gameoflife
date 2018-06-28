@@ -99,15 +99,41 @@ function drawGrid() {
             yCell = 0;
         }
 
+        // send data to c sharp code
+        var postdata = JSON.stringify(
+         {
+             "x": xCell,
+             "y": yCell,
+         });
+         try {
+             $.ajax({
+                 type: "POST",
+                 url: "",
+                 cache: false,
+                 data: postdata,
+                 dataType: "json",
+                 success: getSuccess,
+                 error: getFail
+             });
+         } catch (e) {
+             alert(e);
+         }
+         function getSuccess(data, textStatus, jqXHR) {
+             alert(data.Response);
+         };
+         function getFail(jqXHR, textStatus, errorThrown) {
+             alert(jqXHR.status);
+         };
+
         // console.log(xCell, yCell);
         assignColorToSquare(xCell, yCell, "#0000FF");
     }
 }
 
-function assignColorToSquare(x, y, color) {
+function assignColorToSquare(x, y, squareColor) {
     var c = document.getElementById("gameOfLife");
     var ctx = c.getContext("2d");
-    ctx.fillStyle = color;
+    ctx.fillStyle = squareColor;
     ctx.fillRect((totalWidth / gameWidth) * x, ((totalHeight / gameHeight) * y), (totalWidth / gameWidth) - 1, (totalHeight / gameHeight) - 1);
     ctx.stroke();
 }
