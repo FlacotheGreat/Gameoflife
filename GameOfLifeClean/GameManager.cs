@@ -1,4 +1,4 @@
-﻿using GameOfLifeClean;
+﻿using GameOfLifeClean.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;

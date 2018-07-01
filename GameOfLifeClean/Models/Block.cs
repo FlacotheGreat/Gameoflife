@@ -9,5 +9,13 @@ namespace GameOfLifeClean.Models
         public short? Y { get; set; }
         public sbyte? IsAlive { get; set; }
         public uint Id { get; set; }
+        //server id
     }
+
+    //public Block GetBlock(String blockInfo)
+    //{
+    //    Block B = new Block();
+
+    //    return B;
+    //}
 }
