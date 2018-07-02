@@ -5,8 +5,7 @@ namespace GameOfLifeClean.Models
 {
     public partial class User
     {
-        public string Username { get; set; }
         public string Color { get; set; }
-        public uint Id { get; set; }
+        public string Id { get; set; }
     }
 }

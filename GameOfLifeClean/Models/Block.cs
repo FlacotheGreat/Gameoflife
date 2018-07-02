@@ -5,9 +5,17 @@ namespace GameOfLifeClean.Models
 {
     public partial class Block
     {
-        public short? X { get; set; }
-        public short? Y { get; set; }
+        public short? x { get; set; }
+        public short? y { get; set; }
         public sbyte? IsAlive { get; set; }
-        public uint Id { get; set; }
+        public uint id { get; set; }
+        //server id
     }
+
+    //public Block GetBlock(String blockInfo)
+    //{
+    //    Block B = new Block();
+
+    //    return B;
+    //}
 }

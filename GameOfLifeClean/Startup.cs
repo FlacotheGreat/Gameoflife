@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TestASPWebApplicationMVC;
 using WebSocketManager;
 
@@ -19,6 +20,7 @@ namespace GameOfLifeClean
         }
 
         public IConfiguration Configuration { get; }
+        public static IServiceProvider ServiceProvider { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,8 +30,11 @@ namespace GameOfLifeClean
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env , IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app,ILoggerFactory loggerFactory, IHostingEnvironment env , IServiceProvider serviceProvider)
         {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+            
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -41,7 +46,7 @@ namespace GameOfLifeClean
             }
 
             app.UseWebSockets();
-            app.MapWebSocketManager("/server", serviceProvider.GetService<BlockHandler>());
+            app.MapWebSocketManager("/server", serviceProvider.GetService<UserHandler>());
 
             app.UseStaticFiles();
 
@@ -51,6 +56,8 @@ namespace GameOfLifeClean
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ServiceProvider = serviceProvider;
 
             GameManager.Instance.Initialize();
         }

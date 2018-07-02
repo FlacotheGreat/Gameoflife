@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GameOfLifeClean.Models;
+using Newtonsoft.Json;
 
 namespace GameOfLifeClean.Controllers
 {
@@ -15,19 +16,16 @@ namespace GameOfLifeClean.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
+        [HttpPost]
+        //public string GetGridValues(string blockInfo)
+        //{
+        //    Block B = new Block();
 
-            return View();
-        }
+        //    string info = JsonConvert.DeserializeObject<Block>(blockInfo);
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+        //    return B;
 
-            return View();
-        }
+        //}
 
         public IActionResult Error()
         {

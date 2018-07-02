@@ -33,17 +33,17 @@ namespace GameOfLifeClean.Models
             {
                 entity.ToTable("block");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.id).HasColumnName("id");
 
                 entity.Property(e => e.IsAlive)
                     .HasColumnName("is_alive")
                     .HasColumnType("tinyint(1)");
 
-                entity.Property(e => e.X)
+                entity.Property(e => e.x)
                     .HasColumnName("x")
                     .HasColumnType("smallint(6)");
 
-                entity.Property(e => e.Y)
+                entity.Property(e => e.y)
                     .HasColumnName("y")
                     .HasColumnType("smallint(6)");
             });
@@ -58,9 +58,6 @@ namespace GameOfLifeClean.Models
                     .HasColumnName("color")
                     .HasMaxLength(6);
 
-                entity.Property(e => e.Username)
-                    .HasColumnName("username")
-                    .HasMaxLength(255);
             });
         }
     }
