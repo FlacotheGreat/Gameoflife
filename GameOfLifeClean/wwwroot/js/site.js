@@ -9,23 +9,6 @@ var user;
 var users[];
 var block;
 
-//window.onload = function () {
-
-//    connection = new WebSocketManager.Connection("ws://localhost:5000/server");
-//    connection.connectionMethods.onConnected = () => {
-//        console.log("This is a test")
-
-//    }
-
-//    connection.connectionMethods.onDisconnected = () => {
-
-
-//    }
-
-//    connection.start()
-
-//}
-
 function drawGrid() {
 
     user = new user();
@@ -52,13 +35,6 @@ function drawGrid() {
 
     connection.start()
 
-
-    test = {
-        x: 5,
-        y: 10,
-        alive: true,
-        id: 1
-    };
     var c = document.getElementById("gameOfLife");
     var ctx = c.getContext("2d");
     ctx.clearRect(0, 0, totalWidth, totalHeight); // clear the canvass
