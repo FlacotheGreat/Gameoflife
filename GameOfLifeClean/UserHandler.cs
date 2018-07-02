@@ -5,20 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using TestASPWebApplicationMVC;
 using WebSocketManager;
 using WebSocketManager.Common;
 
 namespace GameOfLifeClean
 {
-    public class BlockHandler : WebSocketHandler
+    public class UserHandler : WebSocketHandler
     {
-        public BlockHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
+        public UserHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
         {
         }
 
-        public async Task ConnectedUser(string socketId, string serializedBlock)
+        public async Task ConnectedUser(string socketId, string serializedUser)
         {
-            var block = JsonConvert.DeserializeObject<Block>(serializedBlock);
+            var user = JsonConvert.DeserializeObject<User>(serializedUser);
+            var exists = GameManager.Instance.Users.ContainsKey(socketId);
+            if (!exists)
+                GameManager.Instance.Users.TryAdd(user.Id, user);
+
+        }
+
+        public async Task DisconnectedUser(string socketId, string usr)
+        {
+            GameManager.Instance.Users.TryRemove(socketId, out User usrname);
         }
 
         public override async Task OnConnected(WebSocket socket)

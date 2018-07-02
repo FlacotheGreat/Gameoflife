@@ -1,4 +1,5 @@
-﻿using GameOfLifeClean.Models;
+﻿using GameOfLifeClean;
+using GameOfLifeClean.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace TestASPWebApplicationMVC
@@ -14,7 +16,8 @@ namespace TestASPWebApplicationMVC
     {
         private static GameManager instance;
         private static readonly object padLock = new object();
-        public ConcurrentDictionary<string, Block> Blocks { get; set; }
+        public ConcurrentDictionary<string, User> Users { get; set; }
+        public ConcurrentDictionary<string, Block> Block { get; set; }
         public Timer Timer;
 
         public static GameManager Instance
@@ -34,14 +37,19 @@ namespace TestASPWebApplicationMVC
 
         public void Initialize()
         {
-            Blocks = new ConcurrentDictionary<string, Block>();
+            Users = new ConcurrentDictionary<string, User>();
             Timer = new Timer(callback, null,0, 1000/15);
         }
 
         private void callback(object state)
         {
-            var listOfBlocks = JsonConvert.SerializeObject(Blocks.Values);
-            //Send the blocks to the open client
+
+            var listOfUsers = JsonConvert.SerializeObject(Users.Values);
+            //Send the users to the open client
+            Startup.ServiceProvider.GetRequiredService<UserHandler>()
+            .InvokeClientMethodToAllAsync("pingUsers", listOfUsers)
+            .Wait();
+
         }
     }
 }

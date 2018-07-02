@@ -5,6 +5,9 @@ var totalHeight = 600;
 var totalWidth = 600;
 
 var connection;
+var user;
+var users[];
+var block;
 
 //window.onload = function () {
 
@@ -25,16 +28,27 @@ var connection;
 
 function drawGrid() {
 
+    user = new user();
+
     connection = new WebSocketManager.Connection("ws://localhost:5000/server");
+
     connection.connectionMethods.onConnected = () => {
-        
+        user.id = connection.connectionId;
+
+        connection.invoke("ConnectedUser", connection.connectionId, JSON.stringify(user));
 
     }
 
     connection.connectionMethods.onDisconnected = () => {
 
+        connection.invoke("DisconnectedUser", connection.connectionId,"");
 
     }
+
+    connection.clientMethods["pingUsers"] = (serUsers) => {
+        users = JSON.parse(serUser);
+        console.log(users);
+    };
 
     connection.start()
 
@@ -140,6 +154,23 @@ function drawGrid() {
         // console.log(xCell, yCell);
         assignColorToSquare(xCell, yCell, "#0000FF");
     }
+}
+
+$(window).unload =(function () {
+    connection.invoke("DisconnectedUser", connection.connectionId,"")
+})
+
+function user() {
+    this.id = "";
+    this.color = "";
+}
+
+function block() {
+    this.id = "";
+    this.color = user.color;
+    this.x = "";
+    this.y = "";
+    this.alive = "";
 }
 
 function assignColorToSquare(x, y, color) {
