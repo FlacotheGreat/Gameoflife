@@ -46,9 +46,9 @@ namespace TestASPWebApplicationMVC
 
             var listOfUsers = JsonConvert.SerializeObject(Users.Values);
             //Send the users to the open client
-            Startup.ServiceProvider.GetRequiredService<UserHandler>()
-            .InvokeClientMethodToAllAsync("pingUsers", listOfUsers)
-            .Wait();
+            //Startup.ServiceProvider.GetRequiredService<UserHandler>()
+            //.InvokeClientMethodToAllAsync("pingUsers", listOfUsers)
+            //.Wait();
 
         }
     }
