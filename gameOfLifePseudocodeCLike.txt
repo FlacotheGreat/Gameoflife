@@ -1,5 +1,11 @@
 //game of life logic pseudocode
 
+//overall logic
+//process clicks to new game state
+//process new game state based on current game state
+//save new game state
+//send new game state to users
+
 //some problems:
 //1. somehow, a clicked square needs to tell a controller or something which x and y were clicked
 //2. this code needs to send out its completed nextGrid to the clients so they will have an updated screen
