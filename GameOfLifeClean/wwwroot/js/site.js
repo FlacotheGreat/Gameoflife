@@ -60,20 +60,19 @@ function drawGrid() {
         // console.log(x, y);
         var xCell = 0;
 
-        for (var i = -1; i < x; i += 0.125){
+        for(int i = -0.875; i < x; i += 0.125){
           xCell++;
         }
 
-        var yCell = 0;
-        for(var i = -1; i < y; i += 0.125){
-          yCell++;
+        var yCell = 15;
+        for(int i = -0.875; i < y; i += 0.125){
+          yCell--;
         }
+
+        console.log("x: " + xCell + " y: " + yCell);
         //send x and y cell data to c#
 
-        console.log(xCell);
-        console.log(yCell);
-
-        assignColorToSquare(xCell, yCell, "#0000FF");
+        assignColorToSquare(xCell, yCell);
 
     }
 }
