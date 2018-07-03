@@ -60,12 +60,12 @@ function drawGrid() {
         // console.log(x, y);
         var xCell = 0;
 
-        for(int i = -0.875; i < x; i += 0.125){
+        for(var i = -0.875; i < x; i += 0.125){
           xCell++;
         }
 
         var yCell = 15;
-        for(int i = -0.875; i < y; i += 0.125){
+        for(var i = -0.875; i < y; i += 0.125){
           yCell--;
         }
 
