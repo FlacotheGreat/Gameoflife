@@ -43,11 +43,13 @@ namespace TestASPWebApplicationMVC
 
         private void callback(object state)
         {
+
             var listOfUsers = JsonConvert.SerializeObject(Users.Values);
             //Send the users to the open client
             Startup.ServiceProvider.GetRequiredService<UserHandler>()
             .InvokeClientMethodToAllAsync("pingUsers", listOfUsers)
             .Wait();
+
         }
     }
 }
