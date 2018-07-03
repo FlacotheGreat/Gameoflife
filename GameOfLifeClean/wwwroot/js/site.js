@@ -6,7 +6,7 @@ var totalWidth = 600;
 
 var connection;
 var user;
-var users[];
+var users = [];
 var block;
 
 
@@ -60,17 +60,20 @@ function drawGrid() {
         // console.log(x, y);
         var xCell = 0;
 
-        for(int i = -1; i < x; i += 0.125){
+        for (var i = -1; i < x; i += 0.125){
           xCell++;
         }
 
         var yCell = 0;
-        for(int i = -1; i < y; i += 0.125){
+        for(var i = -1; i < y; i += 0.125){
           yCell++;
         }
         //send x and y cell data to c#
 
-        // assignColorToSquare(xCell, yCell, "#0000FF");
+        console.log(xCell);
+        console.log(yCell);
+
+        assignColorToSquare(xCell, yCell, "#0000FF");
 
     }
 }
