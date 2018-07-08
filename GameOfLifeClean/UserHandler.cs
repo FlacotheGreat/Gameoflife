@@ -20,10 +20,13 @@ namespace GameOfLifeClean
         public async Task ConnectedUser(string socketId, string serializedUser)
         {
             var user = JsonConvert.DeserializeObject<User>(serializedUser);
+            
+
             var exists = GameManager.Instance.Users.ContainsKey(socketId);
             if (!exists)
+            {
                 GameManager.Instance.Users.TryAdd(user.Id, user);
-
+            }
         }
 
         public async Task DisconnectedUser(string socketId, string usr)
@@ -42,7 +45,9 @@ namespace GameOfLifeClean
             {
                 MessageType = MessageType.Text,
                 Data = $"User: {socketID} is Connected"
+                
             };
+            Console.WriteLine(message.Data);
         }
 
         public override async Task OnDisconnected(WebSocket socket)
@@ -56,6 +61,7 @@ namespace GameOfLifeClean
                 MessageType = MessageType.Text,
                 Data = $"User: {socketID} is now disconnected"
             };
+            Console.WriteLine(message.Data);
 
         }
     }

@@ -36,6 +36,10 @@ function drawGrid() {
 
     connection.start()
 
+    $(window).unload(function () {
+        connection.invoke("DisconnectedUser", connection.connectionId, "");
+    });
+
     var c = document.getElementById("gameOfLife");
     var ctx = c.getContext("2d");
     ctx.clearRect(0, 0, totalWidth, totalHeight); // clear the canvass
@@ -77,9 +81,9 @@ function drawGrid() {
     }
 }
 
-$(window).unload =(function () {
-    connection.invoke("DisconnectedUser", connection.connectionId,"")
-})
+$(window).unload(function () {
+    connection.invoke("DisconnectedUser", connection.connectionId, "");
+});
 
 function user() {
     this.id = "";
