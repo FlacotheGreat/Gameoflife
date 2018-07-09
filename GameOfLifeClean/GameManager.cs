@@ -37,8 +37,18 @@ namespace TestASPWebApplicationMVC
 
         public void Initialize()
         {
-            Users = new ConcurrentDictionary<string, User>();
-            Timer = new Timer(callback, null,0, 1000/15);
+            if(Timer == null){
+                Users = new ConcurrentDictionary<string, User>();
+                Timer = new Timer(callback, null,0, 1000/15);
+            } 
+        }
+
+        public void StopTime()
+        {
+            if(Timer != null)
+            {
+                Timer.Dispose();
+            }
         }
 
         private void callback(object state)
