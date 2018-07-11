@@ -9,44 +9,10 @@
 
     <head>
         <title>Game of Life</title>
-        <script type="text/javascript" src="~/js/site.js">
-        //GameManager.Instance.Initialize(); to start the game
-        function startGame() {
-            $.ajax({
-            type: "POST",
-            url: 'GameManager.cs/GameManager.Instance.Initialize',
-            data: "";
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (msg){
-                $("#divResult").html("success");
-            },
-            error: function(e){
-                $("#divResult").html("Something bad happened.");
-            }
-
-            });
-        }
-
-        //need to write csharp stop code
-        function stopGame() {
-            $.ajax({
-            type: "POST",
-            url: 'GameManager.cs/GameManager.Instance.StopTime',
-            data: "";
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (msg){
-                $("#divResult").html("success");
-            },
-            error: function(e){
-                $("#divResult").html("Something bad happened.");
-            }
-
-            });
-        }
-        </script>
+        
     </head>    
+
+    <script type="text/javascript" src="~/js/site.js"></script>
 
     <body onload="drawGrid();">
         <canvas id="gameOfLife" width='600px' height='600px' style='border:1px solid #000000;'>
@@ -54,15 +20,10 @@
         </canvas>
     </body>
 
-
     @using (Html.BeginForm())
     {
         <input align="right" type="color" id="userColor" value="Select Color" />
     }
-
-    <Button id="Button1" OnClick="startbtn" text="Start" runat="server">Start</Button>
-    <Button id="Button2" OnClick="stopbtn" text="Stop" runat="server">Stop</Button>
-
-
-
+    <Button id="Button1" onclick="startGame()" text="Start" runat="server">Start</Button>
+    <Button id="Button2" onclick="stopGame()" text="Stop" runat="server">Stop</Button>
 </div>
