@@ -1,4 +1,6 @@
-﻿namespace GameOfLifeClean
+﻿using System;
+
+namespace GameOfLifeClean
 {
     public class GameLogic
     {
@@ -7,6 +9,17 @@
         //bools represent alive or dead
         bool[,] currentGrid = new bool[xLength, yLength];
         bool[,] nextGrid = new bool[xLength, yLength];
+
+        private bool startGame = false;
+
+        public void gameStart(bool isStart)
+        {
+
+            startGame = isStart;
+
+            Console.WriteLine(startGame);
+
+        }
 
         //initial clear
         void initalClear()
@@ -22,11 +35,6 @@
         }
 
         //on a new click
-
-        //!!!------------------------------------------!!!
-        //get x and y from js somehow
-        //!!!------------------------------------------!!!
-
         public void onNewClick(int xClick, int yClick)
         {
             //if the cell was dead, make it alive, otherwise, kill it
@@ -41,7 +49,7 @@
         }
 
         //to calculate the next grid
-        void getNextGrid()
+        public void getNextGrid()
         {
             //loop through the whole current grid
             for (int i = 0; i < xLength; i++)

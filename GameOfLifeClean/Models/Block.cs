@@ -12,10 +12,4 @@ namespace GameOfLifeClean.Models
         //server id
     }
 
-    //public Block GetBlock(String blockInfo)
-    //{
-    //    Block B = new Block();
-
-    //    return B;
-    //}
 }

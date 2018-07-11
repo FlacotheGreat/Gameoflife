@@ -17,7 +17,6 @@ namespace TestASPWebApplicationMVC
         private static GameManager instance;
         private static readonly object padLock = new object();
         public ConcurrentDictionary<string, User> Users { get; set; }
-        public ConcurrentDictionary<string, Block> Block { get; set; }
         public Timer Timer;
 
         public static GameManager Instance

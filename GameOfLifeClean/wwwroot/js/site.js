@@ -74,13 +74,26 @@ function drawGrid() {
         }
 
         console.log("x: " + xCell + " y: " + yCell);
-        //send x and y cell data to c#
 
+        //send x and y cell data to c#
+        connection.invoke("PassXandY", connection.connectionId, JSON.stringify(xCell), JSON.stringify(yCell));
         assignColorToSquare(xCell, yCell);
 
-        connection.invoke("PassXandY", connection.connectionId, JSON.stringify(xCell), JSON.stringify(yCell));
-
     }
+}
+
+
+
+//document.getElementById("Start").onclick = function (e) { connection.invoke("startGame", connection.connectionId, "True"); };
+
+function Start() {
+    connection.invoke("startGame", connection.connectionId, "True");
+    console.log("Game Started");
+}
+
+function Stop() {
+    connection.invoke("startGame", connection.connectionId, "False");
+    console.log("Game Stoped");
 }
 
 function user() {

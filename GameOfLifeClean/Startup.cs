@@ -43,8 +43,8 @@ namespace GameOfLifeClean
             }
 
             app.UseWebSockets();
-            app.MapWebSocketManager("/server", serviceProvider.GetService<UserHandler>());
-
+            app.MapWebSocketManager("/server", serviceProvider.GetService<GameHandler>());
+       
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
