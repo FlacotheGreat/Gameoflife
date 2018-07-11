@@ -58,10 +58,10 @@ namespace TestASPWebApplicationMVC
             //Send the users to the open client
 
 
-            foreach (var item in Users.Values)
-            {
-                Console.WriteLine(item.Id + "-" + item.Color);
-            }
+            //foreach (var item in Users.Values)
+            //{
+            //    Console.WriteLine(item.Id + "-" + item.Color);
+            //}
             //Startup.ServiceProvider
             //.GetRequiredService<UserHandler>()
             //.InvokeClientMethodToAllAsync("pingUsers", listOfUsers)

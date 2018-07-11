@@ -18,7 +18,7 @@ function drawGrid() {
 
     connection.connectionMethods.onConnected = () => {
         user.id = connection.connectionId;
-
+                          //("Name of Method to invoke on server",SocketID,Content to pass)
         connection.invoke("ConnectedUser", connection.connectionId, JSON.stringify(user));
 
     }
@@ -78,12 +78,11 @@ function drawGrid() {
 
         assignColorToSquare(xCell, yCell);
 
+
+        connection.invoke("PassXandY", connection.connectionId, JSON.stringify(xCell), JSON.stringify(yCell));
+
     }
 }
-
-$(window).unload(function () {
-    connection.invoke("DisconnectedUser", connection.connectionId, "");
-});
 
 function user() {
     this.id = "";
@@ -91,8 +90,6 @@ function user() {
 }
 
 function block() {
-    this.id = "";
-    this.color = user.color;
     this.x = "";
     this.y = "";
     this.alive = "";

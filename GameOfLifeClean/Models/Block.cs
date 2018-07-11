@@ -7,7 +7,7 @@ namespace GameOfLifeClean.Models
     {
         public short? x { get; set; }
         public short? y { get; set; }
-        public sbyte? IsAlive { get; set; }
+        public bool? IsAlive { get; set; }
         public uint id { get; set; }
         //server id
     }

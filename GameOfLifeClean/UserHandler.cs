@@ -34,6 +34,23 @@ namespace GameOfLifeClean
             GameManager.Instance.Users.TryRemove(socketId, out User usrname);
         }
 
+        public async Task PassXandY(string socketId, string X, string Y)
+        {
+            int yCoord = Convert.ToInt16(JsonConvert.DeserializeObject(Y));
+            var xCoord = Convert.ToInt16(JsonConvert.DeserializeObject(X));
+
+            Block b = new Block();
+            GameLogic game = new GameLogic();
+
+            Console.WriteLine(xCoord + ":" + yCoord);
+
+            game.onNewClick(xCoord, yCoord);
+
+            //b.x = block.x;
+            //b.y = block.y;
+            //b.IsAlive = true;
+        }
+
         public override async Task OnConnected(WebSocket socket)
         {
             await base.OnConnected(socket);
