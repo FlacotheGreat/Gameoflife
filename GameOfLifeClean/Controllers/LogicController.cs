@@ -49,7 +49,7 @@ namespace GameOfLifeClean.Controllers
         //get x and y from js somehow
         //!!!------------------------------------------!!!
 
-        public static void onNewClick(int xClick, int yClick)
+        void onNewClick(int xClick, int yClick)
         {
             //if the cell was dead, make it alive, otherwise, kill it
             if (currentGrid[xClick, yClick] == false)

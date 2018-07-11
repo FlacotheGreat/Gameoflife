@@ -29,7 +29,7 @@ function drawGrid() {
 
     }
 
-    connection.clientMethods["pingUsers"] = (serUsers) => {
+    connection.clientMethods["recieveNewBoard"] = (socketId,  ) => {
         users = JSON.parse(serUser);
         console.log(users);
     };
@@ -84,7 +84,7 @@ function drawGrid() {
 
 
 
-//document.getElementById("Start").onclick = function (e) { connection.invoke("startGame", connection.connectionId, "True"); };
+//document.getElementById("Start").onclick = function (e) { connection.invoke("startGame", connection.connectionId, "True"); 
 
 function Start() {
     connection.invoke("startGame", connection.connectionId, "True");

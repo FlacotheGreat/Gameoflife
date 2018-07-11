@@ -14,11 +14,13 @@ namespace GameOfLifeClean
     public class GameHandler : WebSocketHandler
     {
         GameLogic game = new GameLogic();
+        private bool isStarted = false;
 
         public GameHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
         {
         }
 
+     
         //Used to unique users using websockets
         public async Task ConnectedUser(string socketId, string serializedUser)
         {
@@ -51,8 +53,10 @@ namespace GameOfLifeClean
             {
                 MessageType = MessageType.Text,
                 Data = $"User: {socketID} is Connected"
-                
+
             };
+
+            await SendMessageToAllAsync(message);
             Console.WriteLine(message.Data);
         }
 
@@ -68,8 +72,9 @@ namespace GameOfLifeClean
                 MessageType = MessageType.Text,
                 Data = $"User: {socketID} is now disconnected"
             };
-            Console.WriteLine(message.Data);
 
+            await SendMessageToAllAsync(message);
+            Console.WriteLine(message.Data);
         }
 
         //Gets X and Y coords from Canvas element and passes it to the game logic
@@ -86,8 +91,12 @@ namespace GameOfLifeClean
 
         public async Task startGame(string socketId, string isStart)
         {
-            bool startGame = Convert.ToBoolean(isStart);
+            isStarted = Convert.ToBoolean(isStart);
+            //Timer = new System.Timers.Timer(2000);
 
+                game.getNextGrid();
+                Console.WriteLine(isStarted);
+            
         }
 
     }
