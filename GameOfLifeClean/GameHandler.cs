@@ -13,8 +13,9 @@ namespace GameOfLifeClean
 {
     public class GameHandler : WebSocketHandler
     {
-        GameLogic game = new GameLogic();
+
         private bool isStarted = false;
+        GameLogic game = new GameLogic();
 
         public GameHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
         {
@@ -89,6 +90,10 @@ namespace GameOfLifeClean
 
             game.onNewClick(xCoord, yCoord, fillColor);
 
+            await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, xCoord, yCoord, fillColor);
+                
+            Console.WriteLine("");
+            
         }
 
         public async Task SendXYColor(string socketId, string x, string y, string fillColor)
@@ -103,10 +108,21 @@ namespace GameOfLifeClean
             //Timer = new System.Timers.Timer(2000);
 
                 game.getNextGrid();
+
                 for(int i = 0; i < 16; i++){
-                    for(int j = 0; j < 16; j++){
-                        await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, i, j, game.getIndexColor(i,j));
+
+                    for (int j = 0; j < 16; j++)
+                    {
+
+                        Console.Write(" " + game.currentGrid[i, j] + " ");
+                        if (game.currentGrid[i, j])
+                        {
+                            await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, i, j, game.getIndexColor(i, j));
+                        }
+                
                     }
+
+                    Console.WriteLine("");
                 }
                 Console.WriteLine(isStarted);
             

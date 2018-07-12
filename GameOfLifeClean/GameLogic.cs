@@ -24,13 +24,14 @@ namespace GameOfLifeClean
         static int xLength = 16;
         static int yLength = 16;
         //bools represent alive or dead
-        bool[,] currentGrid = new bool[xLength, yLength];
-        bool[,] nextGrid = new bool[xLength, yLength];
+        public bool[,] currentGrid = new bool[xLength, yLength];
+        public bool[,] nextGrid = new bool[xLength, yLength];
+        public bool firstLaunch = true;
 
         //keep track of colors too
-        System.Drawing.Color[,] currentGridColors = new System.Drawing.Color[xLength, yLength];
+        public System.Drawing.Color[,] currentGridColors = new System.Drawing.Color[xLength, yLength];
 
-        System.Drawing.Color[,] nextGridColors = new System.Drawing.Color[xLength, yLength];
+        public System.Drawing.Color[,] nextGridColors = new System.Drawing.Color[xLength, yLength];
 
         //initial clear
         void initalClear()
@@ -67,6 +68,11 @@ namespace GameOfLifeClean
         //to calculate the next grid
         public void getNextGrid()
         {
+            if(firstLaunch)
+            {
+                initalClear();
+                firstLaunch = false;
+            }
             //loop through the whole current grid
             for (int i = 0; i < xLength; i++)
             {

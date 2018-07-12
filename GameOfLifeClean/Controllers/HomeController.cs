@@ -16,16 +16,6 @@ namespace GameOfLifeClean.Controllers
             return View();
         }
 
-        [HttpPost]
-        //public string GetGridValues(string blockInfo)
-        //{
-        //    Block B = new Block();
-
-        //    string info = JsonConvert.DeserializeObject<Block>(blockInfo);
-
-        //    return B;
-
-        //}
 
         public IActionResult Error()
         {
