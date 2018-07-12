@@ -38,7 +38,7 @@ function drawGrid() {
     connection.clientMethods["ReceiveUpdateAsXYColor"] = (socketId, x, y, r, g, b) => {
         // console.log(r + " " + g + " " + b);
         var colorToUse = "#" + r + g + b;
-        console.log(colorToUse);
+        // console.log(colorToUse + "(" + x + "," + y + ")");
         assignColorToSquare(x,y,colorToUse);
     };
 
@@ -81,11 +81,11 @@ function drawGrid() {
           yCell--;
         }
 
-        console.log("x: " + xCell + " y: " + yCell);
+        // console.log("x: " + xCell + " y: " + yCell);
+        
+        // assignColorToSquare(xCell, yCell);
+
         //send x and y cell data to c#
-
-        assignColorToSquare(xCell, yCell);
-
         connection.invoke("PassXandY", connection.connectionId, JSON.stringify(xCell), JSON.stringify(yCell), document.getElementById("userColor").value);
 
     }
@@ -131,3 +131,10 @@ function Start(){
     startGame = true;
     connection.invoke("startGame", connection.connectionId, JSON.stringify(startGame));
 }
+
+function Stop(){
+    startGame = false;
+    connection.invoke("stopGame", connection.connectionId, JSON.stringify(startGame));
+}
+
+window.onload = drawGrid();

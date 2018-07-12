@@ -11,10 +11,8 @@
         <title>Game of Life</title>
         
     </head>    
-
-    <script type="text/javascript" src="~/js/site.js"></script>
-
-    <body onload="drawGrid();">
+    
+    <body>
         <canvas id="gameOfLife" width='600px' height='600px' style='border:1px solid #000000;'>
             Your browser does not support html5
         </canvas>
@@ -24,8 +22,9 @@
     {
         <input align="right" type="color" id="userColor" value="Select Color" />
     }
-
+    
     <Button id="Start" OnClick="Start()" text="Start">Start</Button>
     <Button id="Stop" OnClick="Stop()" text="Stop">Stop</Button>
 
+    <script type="text/javascript" src="~/js/site.js"></script>
 </div>

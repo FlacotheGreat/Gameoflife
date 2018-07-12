@@ -52,27 +52,29 @@ namespace GameOfLifeClean
 
         public void onNewClick(int xClick, int yClick, System.Drawing.Color fillColor)
         {
+            if(firstLaunch)
+            {
+                initalClear();
+                firstLaunch = false;
+            }
+            Console.WriteLine("User sent color: " + fillColor);
             //if the cell was dead, make it alive, otherwise, kill it
             if (currentGrid[xClick, yClick] == false)
             {
-                nextGrid[xClick, yClick] = true;
-                nextGridColors[xClick, yClick] = fillColor;
+                currentGrid[xClick, yClick] = true;
+                currentGridColors[xClick, yClick] = fillColor;
+                Console.WriteLine(currentGridColors[xClick, yClick]);
             }
             else
             {
-                nextGrid[xClick, yClick] = false;
-                nextGridColors[xClick, yClick] = System.Drawing.Color.FromArgb(255, 255, 255);
+                currentGrid[xClick, yClick] = false;
+                currentGridColors[xClick, yClick] = System.Drawing.Color.FromArgb(255, 255, 255);
             }
         }
 
         //to calculate the next grid
         public void getNextGrid()
         {
-            if(firstLaunch)
-            {
-                initalClear();
-                firstLaunch = false;
-            }
             //loop through the whole current grid
             for (int i = 0; i < xLength; i++)
             {
@@ -310,17 +312,20 @@ namespace GameOfLifeClean
                             colorList.Add(currentGridColors[i+1, j+1]);
                         }
                     }
+                    // Console.WriteLine("Position (" + i + "," + j + ") alive: " + currentGrid[i,j] + " and has " + aliveNeighborCount + " neighbors.");
                     //if the current spot is dead but has 3 living neighbors, it comes alive next round
                     if (currentGrid[i, j] == false)
                     {
                         if (aliveNeighborCount == 3)
                         {
+                            // Console.WriteLine("    it is coming alive.");
                             nextGrid[i, j] = true;
                             if(colorList.Count == 2){
                                 nextGridColors[i, j] = blendColors(colorList[0], colorList[1]);
                             }else if(colorList.Count == 3){
                                 nextGridColors[i, j] = blendColors(colorList[0], colorList[1], colorList[2]);
                             }
+                            // Console.WriteLine("         and is colored " + nextGridColors[i,j]);
                         }
                     }
                     //if the current spot is alive but has 1 or 0 or more than 3 neighbors, it dies next round
@@ -328,14 +333,17 @@ namespace GameOfLifeClean
                     {
                         if (aliveNeighborCount <= 1 || aliveNeighborCount >= 4)
                         {
+                            // Console.WriteLine("   it is dying.");
                             nextGrid[i, j] = false;
                             nextGridColors[i, j] = System.Drawing.Color.FromArgb(255, 255, 255);
                         }else{
+                            nextGrid[i, j] = true;
                             if(colorList.Count == 2){
                                 nextGridColors[i, j] = blendColors(colorList[0], colorList[1]);
                             }else if(colorList.Count == 3){
                                 nextGridColors[i, j] = blendColors(colorList[0], colorList[1], colorList[2]);
                             }
+                            // Console.WriteLine("    it is changing color to " + nextGridColors[i, j] + " from " + currentGridColors[i, j]);
                         }
                     }
                 }
@@ -343,26 +351,6 @@ namespace GameOfLifeClean
             //!!!------------------------------------------!!!
             //push the nextGrid in such a way that the clients will display it...
             //!!!------------------------------------------!!!
-
-            //maybe something like
-            for (int i = 0; i < xLength; i++)
-            {
-                for (int j = 0; j < yLength; j++)
-                {
-                    if (nextGrid[i, j] == true)
-                    {
-                        // tellAllClientsToExecute(assignColorToSquare(i, j, someColor));
-                        //in the game handler we need to use the sendXYColor method
-                        
-                    }
-                    else
-                    {
-                        //this makes a square white
-                        // tellAllClientsToExecute(assignColorToSquare(i, j, #FFFFFF))
-
-                    }
-                }
-            }
 
             //now that logic for the next grid is done, copy it to the current grid and clear out the next grid
             for (int i = 0; i < xLength; i++)

@@ -17,7 +17,6 @@ namespace TestASPWebApplicationMVC
         private static GameManager instance;
         private static readonly object padLock = new object();
         public ConcurrentDictionary<string, User> Users { get; set; }
-        public Timer Timer;
 
         public static GameManager Instance
         {
@@ -36,18 +35,7 @@ namespace TestASPWebApplicationMVC
 
         public void Initialize()
         {
-            if(Timer == null){
-                Users = new ConcurrentDictionary<string, User>();
-                Timer = new Timer(callback, null,0, 1000/15);
-            } 
-        }
-
-        public void StopTime()
-        {
-            if(Timer != null)
-            {
-                Timer.Dispose();
-            }
+            Users = new ConcurrentDictionary<string, User>();
         }
 
         private void callback(object state)
