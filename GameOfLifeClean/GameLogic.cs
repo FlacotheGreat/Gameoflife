@@ -65,7 +65,7 @@ namespace GameOfLifeClean
         }
 
         //to calculate the next grid
-        void getNextGrid()
+        public void getNextGrid()
         {
             //loop through the whole current grid
             for (int i = 0; i < xLength; i++)
@@ -384,6 +384,10 @@ namespace GameOfLifeClean
         bool checkNeighbor(int x, int y)
         {
             return currentGrid[x, y];
+        }
+
+        public System.Drawing.Color getIndexColor(int x, int y){
+            return currentGridColors[x, y];
         }
     }
 }

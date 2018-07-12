@@ -8,6 +8,7 @@ var connection;
 var user;
 var users = [];
 var block;
+var startGame;
 
 
 function drawGrid() {
@@ -36,7 +37,7 @@ function drawGrid() {
 
     connection.clientMethods["ReceiveUpdateAsXYColor"] = (socketId, x, y, fillColor) => {
         assignColorToSquare(x,y,fillColor);
-    }
+    };
 
     connection.start()
 
@@ -121,4 +122,9 @@ function clearSquare(x, y) {
     ctx.fillStyle = "#FFFFFF";
     ctx.fillRect((totalWidth / gameWidth) * x, ((totalHeight / gameHeight) * y), (totalWidth / gameWidth) - 1, (totalHeight / gameHeight) - 1);
     ctx.stroke();
+}
+
+function Start(){
+    startGame = true;
+    connection.invoke("startGame", connection.connectionId, JSON.stringify(startGame));
 }

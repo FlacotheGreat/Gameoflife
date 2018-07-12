@@ -93,6 +93,7 @@ namespace GameOfLifeClean
 
         public async Task SendXYColor(string socketId, string x, string y, string fillColor)
         {
+
             await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, x, y, fillColor);
         }
 
@@ -102,6 +103,11 @@ namespace GameOfLifeClean
             //Timer = new System.Timers.Timer(2000);
 
                 game.getNextGrid();
+                for(int i = 0; i < 16; i++){
+                    for(int j = 0; j < 16; j++){
+                        await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, i, j, game.getIndexColor(i,j));
+                    }
+                }
                 Console.WriteLine(isStarted);
             
         }
