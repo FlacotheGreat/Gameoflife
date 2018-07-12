@@ -34,7 +34,7 @@ namespace GameOfLifeClean
         public System.Drawing.Color[,] nextGridColors = new System.Drawing.Color[xLength, yLength];
 
         //initial clear
-        void initalClear()
+        public void initalClear()
         {
             for (int i = 0; i < xLength; i++)
             {
@@ -387,13 +387,25 @@ namespace GameOfLifeClean
             return returnColor;
         }
 
-        bool checkNeighbor(int x, int y)
+        public bool checkNeighbor(int x, int y)
         {
             return currentGrid[x, y];
         }
 
         public System.Drawing.Color getIndexColor(int x, int y){
             return currentGridColors[x, y];
+        }
+
+        public int getRed(int x, int y){
+            return currentGridColors[x, y].R;
+        }
+
+        public int getGreen(int x, int y){
+            return currentGridColors[x, y].G;
+        }
+
+        public int getBlue(int x, int y){
+            return currentGridColors[x, y].B;
         }
     }
 }

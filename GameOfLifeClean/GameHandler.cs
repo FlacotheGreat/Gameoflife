@@ -13,7 +13,6 @@ namespace GameOfLifeClean
 {
     public class GameHandler : WebSocketHandler
     {
-
         private bool isStarted = false;
         GameLogic game = new GameLogic();
 
@@ -90,36 +89,28 @@ namespace GameOfLifeClean
 
             game.onNewClick(xCoord, yCoord, fillColor);
 
-            await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, xCoord, yCoord, fillColor);
+            await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, xCoord, yCoord, fillColor.R.ToString("X"), fillColor.G.ToString("X"), fillColor.B.ToString("X"));
                 
             Console.WriteLine("");
             
         }
 
-        public async Task SendXYColor(string socketId, string x, string y, string fillColor)
-        {
+        // public async Task SendXYColor(string socketId, string x, string y, string red, string green, string blue)
+        // {
 
-            await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, x, y, fillColor);
-        }
+        //     await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, x, y, red, green, blue);
+        // }
 
         public async Task startGame(string socketId, string isStart)
         {
             isStarted = Convert.ToBoolean(isStart);
             //Timer = new System.Timers.Timer(2000);
-
                 game.getNextGrid();
 
                 for(int i = 0; i < 16; i++){
-
-                    for (int j = 0; j < 16; j++)
-                    {
-
-                        Console.Write(" " + game.currentGrid[i, j] + " ");
-                        if (game.currentGrid[i, j])
-                        {
-                            await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, i, j, game.getIndexColor(i, j));
-                        }
-                
+                    for(int j = 0; j < 16; j++){
+                        Console.WriteLine("x: " + i + " y: " + j + " color: " + game.getIndexColor(i,j) + " alive: " + game.checkNeighbor(i,j));
+                        await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, i, j, game.getRed(i,j).ToString("X"), game.getGreen(i,j).ToString("X"), game.getBlue(i,j).ToString("X"));
                     }
 
                     Console.WriteLine("");

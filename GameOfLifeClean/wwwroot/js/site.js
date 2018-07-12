@@ -35,8 +35,11 @@ function drawGrid() {
         console.log(users);
     };
 
-    connection.clientMethods["ReceiveUpdateAsXYColor"] = (socketId, x, y, fillColor) => {
-        assignColorToSquare(x,y,fillColor);
+    connection.clientMethods["ReceiveUpdateAsXYColor"] = (socketId, x, y, r, g, b) => {
+        // console.log(r + " " + g + " " + b);
+        var colorToUse = "#" + r + g + b;
+        console.log(colorToUse);
+        assignColorToSquare(x,y,colorToUse);
     };
 
     connection.start()
@@ -107,14 +110,14 @@ function assignColorToSquare(x, y, color) {
     ctx.stroke();
 }
 
-function assignColorToSquare(x, y) {
-    var c = document.getElementById("gameOfLife");
-    var ctx = c.getContext("2d");
-    ctx.fillStyle = document.getElementById("userColor").value;
-    console.log(document.getElementById("userColor").value);
-    ctx.fillRect((totalWidth / gameWidth) * x, ((totalHeight / gameHeight) * y), (totalWidth / gameWidth) - 1, (totalHeight / gameHeight) - 1);
-    ctx.stroke();
-}
+// function assignColorToSquare(x, y) {
+//     var c = document.getElementById("gameOfLife");
+//     var ctx = c.getContext("2d");
+//     ctx.fillStyle = document.getElementById("userColor").value;
+//     // console.log(document.getElementById("userColor").value);
+//     ctx.fillRect((totalWidth / gameWidth) * x, ((totalHeight / gameHeight) * y), (totalWidth / gameWidth) - 1, (totalHeight / gameHeight) - 1);
+//     ctx.stroke();
+// }
 
 function clearSquare(x, y) {
     var c = document.getElementById("gameOfLife");
