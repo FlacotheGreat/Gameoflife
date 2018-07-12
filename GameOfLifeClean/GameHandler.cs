@@ -78,15 +78,22 @@ namespace GameOfLifeClean
         }
 
         //Gets X and Y coords from Canvas element and passes it to the game logic
-        public async Task PassXandY(string socketId, string X, string Y)
+        public async Task PassXandY(string socketId, string X, string Y, string userColor)
         {
             int yCoord = Convert.ToInt16(JsonConvert.DeserializeObject(Y));
             var xCoord = Convert.ToInt16(JsonConvert.DeserializeObject(X));
 
+            System.Drawing.Color fillColor = System.Drawing.Color.FromName(userColor);
+
             Console.WriteLine(xCoord + ":" + yCoord);
 
-            game.onNewClick(xCoord, yCoord);
+            game.onNewClick(xCoord, yCoord, fillColor);
 
+        }
+
+        public async Task SendXYColor(string socketId, string x, string y, string fillColor)
+        {
+            await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, x, y, fillColor);
         }
 
         public async Task startGame(string socketId, string isStart)

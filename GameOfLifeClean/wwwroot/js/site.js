@@ -29,10 +29,14 @@ function drawGrid() {
 
     }
 
-    connection.clientMethods["recieveNewBoard"] = (socketId,  ) => {
+    connection.clientMethods["pingUsers"] = (serUsers) => {
         users = JSON.parse(serUser);
         console.log(users);
     };
+
+    connection.clientMethods["ReceiveUpdateAsXYColor"] = (socketId, x, y, fillColor) => {
+        assignColorToSquare(x,y,fillColor);
+    }
 
     connection.start()
 
@@ -74,26 +78,13 @@ function drawGrid() {
         }
 
         console.log("x: " + xCell + " y: " + yCell);
-
         //send x and y cell data to c#
-        connection.invoke("PassXandY", connection.connectionId, JSON.stringify(xCell), JSON.stringify(yCell));
+
         assignColorToSquare(xCell, yCell);
 
+        connection.invoke("PassXandY", connection.connectionId, JSON.stringify(xCell), JSON.stringify(yCell), document.getElementById("userColor").value);
+
     }
-}
-
-
-
-//document.getElementById("Start").onclick = function (e) { connection.invoke("startGame", connection.connectionId, "True"); 
-
-function Start() {
-    connection.invoke("startGame", connection.connectionId, "True");
-    console.log("Game Started");
-}
-
-function Stop() {
-    connection.invoke("startGame", connection.connectionId, "False");
-    console.log("Game Stoped");
 }
 
 function user() {
@@ -130,48 +121,4 @@ function clearSquare(x, y) {
     ctx.fillStyle = "#FFFFFF";
     ctx.fillRect((totalWidth / gameWidth) * x, ((totalHeight / gameHeight) * y), (totalWidth / gameWidth) - 1, (totalHeight / gameHeight) - 1);
     ctx.stroke();
-}
-
-function startGame() {
-
-    // var xmlhttp = new XMLHttpRequest();
-    // xmlhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         document.getElementById("txtHint").innerHTML = this.responseText;
-    //     }
-    // };
-    // xmlhttp.open("GET", "LogicController.asp?x=" + xCell + "y" + yCell, true);
-    // xmlhttp.send();
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: 'GameManager.cs/GameManager.Instance.Initialize()',
-    //     data: "",
-    //     contentType: "application/json; charset=utf-8",
-    //     dataType: "json",
-    //     success: function (msg){
-    //         $("#divResult").html("success");
-    //     },
-    //     error: function(e){
-    //         $("#divResult").html("Something bad happened.");
-    //     }
-
-    // });
-}
-
-function stopGame() {
-    $.ajax({
-        type: "POST",
-        url: 'GameManager.cs/GameManager.Instance.StopTime()',
-        data: "",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg){
-            $("#divResult").html("success");
-        },
-        error: function(e){
-            $("#divResult").html("Something bad happened.");
-        }
-
-    });
 }
