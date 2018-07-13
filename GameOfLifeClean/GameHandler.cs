@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using TestASPWebApplicationMVC;
@@ -16,6 +17,9 @@ namespace GameOfLifeClean
     {
         private bool isStarted = false;
         GameLogic game = new GameLogic();
+        System.Timers.Timer gameTimer = new System.Timers.Timer(1000);
+        static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
+
 
 
         public GameHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
@@ -116,8 +120,6 @@ namespace GameOfLifeClean
         public async Task startGame(string socketId, string isStart)
         {
             isStarted = Convert.ToBoolean(isStart);
-            while(isStarted){      
-                System.Timers.Timer gameTimer = new System.Timers.Timer(1000);
                 gameTimer.Elapsed += new ElapsedEventHandler(generateAndSendNewGrids);
                 gameTimer.Start();
                 // game.getNextGrid();
@@ -134,33 +136,43 @@ namespace GameOfLifeClean
                 //     // Console.WriteLine("");
                 // }
                 // Console.WriteLine(isStarted);
-            }
+            
             
         }
 
         public async void generateAndSendNewGrids(object source, ElapsedEventArgs e){
             Console.WriteLine(GameManager.Instance.Users.Keys.Count);
-            while(isStarted){
+            
                 game.getNextGrid();
                 for(int i = 0; i < 16; i++){
                         for(int j = 0; j < 16; j++){
-                            //needs to send to each user, somehow getting the socketID...
-                            foreach (string someSocketId in GameManager.Instance.Users.Keys){
-                                // Console.WriteLine(someSocketId);
-                                await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", someSocketId, i, j, game.getRed(i,j).ToString("X").PadLeft(2, '0'), game.getGreen(i,j).ToString("X").PadLeft(2, '0'), game.getBlue(i,j).ToString("X").PadLeft(2, '0'));
+                        //needs to send to each user, somehow getting the socketID...
+                        foreach (string someSocketId in GameManager.Instance.Users.Keys)
+                        {
+
+                            await semaphoreSlim.WaitAsync();
+                            try
+                            {
+                                      await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", someSocketId, i, j, game.getRed(i, j).ToString("X").PadLeft(2, '0'), 
+                                      game.getGreen(i, j).ToString("X").PadLeft(2, '0'), game.getBlue(i, j).ToString("X").PadLeft(2, '0'));
+                            }
+                            finally
+                            {
+                                semaphoreSlim.Release();
                             }
                             // Console.WriteLine("x: " + i + " y: " + j + " color: " + game.getIndexColor(i,j) + " alive: " + game.checkNeighbor(i,j));
-                            
+                        }
                         }
 
                         // Console.WriteLine("");
                 }
                 Console.WriteLine(isStarted);
             }
-        }
+        
 
         public async Task stopGame(string socketId, string isStart){
             isStarted = Convert.ToBoolean(isStart);
+            gameTimer.Stop();
         }
 
     }

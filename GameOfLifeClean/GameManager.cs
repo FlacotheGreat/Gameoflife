@@ -49,10 +49,10 @@ namespace TestASPWebApplicationMVC
             //{
             //    Console.WriteLine(item.Id + "-" + item.Color);
             //}
-            //Startup.ServiceProvider
-            //.GetRequiredService<UserHandler>()
-            //.InvokeClientMethodToAllAsync("pingUsers", listOfUsers)
-            //.Wait();
+            Startup.ServiceProvider
+            .GetRequiredService<GameHandler>()
+            .InvokeClientMethodToAllAsync("pingUsers", listOfUsers)
+            .Wait();
 
         }
     }
