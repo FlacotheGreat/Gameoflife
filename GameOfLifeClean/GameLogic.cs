@@ -57,13 +57,13 @@ namespace GameOfLifeClean
                 initalClear();
                 firstLaunch = false;
             }
-            Console.WriteLine("User sent color: " + fillColor);
+            // Console.WriteLine("User sent color: " + fillColor);
             //if the cell was dead, make it alive, otherwise, kill it
             if (currentGrid[xClick, yClick] == false)
             {
                 currentGrid[xClick, yClick] = true;
                 currentGridColors[xClick, yClick] = fillColor;
-                Console.WriteLine(currentGridColors[xClick, yClick]);
+                // Console.WriteLine(currentGridColors[xClick, yClick]);
             }
             else
             {

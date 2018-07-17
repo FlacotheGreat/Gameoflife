@@ -98,7 +98,7 @@ namespace GameOfLifeClean
             // Console.WriteLine("Color: " + rVal + gVal + bVal);
             System.Drawing.Color fillColor = System.Drawing.Color.FromArgb(rVal, gVal, bVal);
 
-            Console.WriteLine(xCoord + ":" + yCoord + " " + fillColor);
+            // Console.WriteLine(xCoord + ":" + yCoord + " " + fillColor);
 
             game.onNewClick(xCoord, yCoord, fillColor);
 
@@ -113,7 +113,7 @@ namespace GameOfLifeClean
                 // await InvokeClientMethodToAllAsync("ReceiveUpdateAsXYColor", socketId, xCoord, yCoord, fillColor.R.ToString("X").PadLeft(2, '0'), fillColor.G.ToString("X").PadLeft(2, '0'), fillColor.B.ToString("X").PadLeft(2, '0'));
             }
                 
-            Console.WriteLine("");
+            // Console.WriteLine("");
             
         }
 
@@ -141,7 +141,7 @@ namespace GameOfLifeClean
         }
 
         public async void generateAndSendNewGrids(object source, ElapsedEventArgs e){
-            Console.WriteLine(GameManager.Instance.Users.Keys.Count);
+            // Console.WriteLine(GameManager.Instance.Users.Keys.Count);
             
                 game.getNextGrid();
                 for(int i = 0; i < 16; i++){
@@ -166,7 +166,7 @@ namespace GameOfLifeClean
 
                         // Console.WriteLine("");
                 }
-                Console.WriteLine(isStarted);
+                // Console.WriteLine(isStarted);
             }
         
 
